@@ -4,7 +4,7 @@
   "description": "电闹播放器 / nox-player: 第三方b站播放器，阿梓播放器威力加强版 / 3rd party Bilibili audio player modified from Azusa-player.",
   "manifest_version": 3,
   "background": {
-    "service_worker": "serviceWorker.js"
+    "scripts": ["serviceWorker.js"]
   },
   "action": {
     "default_icon": {
@@ -18,10 +18,7 @@
       "matches": ["<all_urls>"]
     }
   ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
-    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; child-src 'self';"
-  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
   "content_scripts": [
     {
       "matches": ["*://*/*"],
@@ -32,7 +29,6 @@
     "128": "icons/logo2-128.png"
   },
   "permissions": [
-    "declarativeNetRequest",
     "storage",
     "unlimitedStorage",
     "cookies",
@@ -49,14 +45,5 @@
     "*://*.akamaized.net/*",
     "*://*.bilivideo.cn/*",
     "*://*.youtube.com/*"
-  ],
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "ruleset_1",
-        "enabled": true,
-        "path": "rules.json"
-      }
-    ]
-  }
+  ]
 }

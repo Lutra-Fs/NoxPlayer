@@ -9,11 +9,11 @@ import GenericSyncButton, { GenericPropsR } from './GenericSyncButton';
 
 /**
  * dba is the dropboxauth agent that generates the login url
- * for chrome.identity.launchWebAuthFlow. set DROPBOX_KEY
+ * for browser.identity.launchWebAuthFlow. set DROPBOX_KEY
  * and DROPBOX_SECRET from the created dropbox app in .env
  * to properly initialize dba.
  * make sure that dropbox's accepted URI also contains
- * chrome.identity.getRedirectURL().
+ * browser.identity.getRedirectURL().
  */
 const dba = new DropboxAuth({
   clientId: process.env.DROPBOX_KEY,
@@ -32,7 +32,7 @@ let dbx = new _Dropbox({
 /**
  * this method attempts to login dropbox. the accesstoken can be
  * further processed in the callback function as a part of the
- * returned url from chrome.identity.launchWebAuthFlow.
+ * returned url from browser.identity.launchWebAuthFlow.
  * @param {function} callback function that process the returned url after oauth2.
  * @param {function} errorHandling
  */
@@ -41,10 +41,10 @@ const getAuth = async (
     checkAuthentication(dbx).then(console.debug),
   errorHandling = console.error,
 ) =>
-  chrome.identity.launchWebAuthFlow(
+  browser.identity.launchWebAuthFlow(
     {
       url: String(
-        await dba.getAuthenticationUrl(chrome.identity.getRedirectURL()),
+        await dba.getAuthenticationUrl(browser.identity.getRedirectURL()),
       ),
       interactive: true,
     },

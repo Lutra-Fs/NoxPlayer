@@ -9,14 +9,14 @@ import GenericSyncButton, { GenericPropsR } from './GenericSyncButton';
 let authToken = '';
 const clientId = process.env.GITHUB_KEY;
 const clientSecret = process.env.GITHUB_SECRET;
-const redirectURI = chrome.identity.getRedirectURL();
+const redirectURI = browser.identity.getRedirectURL();
 
 export const getAuth = async (
   callback: (v: string) => Promise<void> = () =>
     checkAuthentication(authToken).then(console.debug),
   errorHandling = logger.error,
 ) =>
-  chrome.identity.launchWebAuthFlow(
+  browser.identity.launchWebAuthFlow(
     {
       url: `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectURI}&scope=repo,user,administration:write`,
       interactive: true,

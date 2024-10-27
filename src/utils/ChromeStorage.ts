@@ -16,11 +16,11 @@ export const getPlaylistIds = (): Promise<string[]> =>
   getItem(StorageKeys.MY_FAV_LIST_KEY, []);
 
 export const saveFav = (updatedToList: NoxMedia.Playlist) =>
-  chrome.storage.local.set({
+  browser.storage.local.set({
     [updatedToList.id]: updatedToList,
   });
 
-export const clearStorage = () => chrome.storage.local.clear();
+export const clearStorage = () => browser.storage.local.clear();
 
 /**
  * wrapper for getting the current playerSetting's value given a key.
@@ -71,8 +71,8 @@ export const importStorageRaw = async (content: Uint8Array) => {
       });
     });
   } else {
-    await chrome.storage.local.clear();
-    await chrome.storage.local.set(parsedContent);
+    await browser.storage.local.clear();
+    await browser.storage.local.set(parsedContent);
   }
   return initPlayerObject();
 };

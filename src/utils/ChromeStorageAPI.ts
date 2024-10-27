@@ -7,10 +7,10 @@ import rejson from '@APM/utils/rejson.json';
 export const SongListSuffix = '-songList';
 
 export const saveItem = (key: string, val: object | string | number) =>
-  chrome.storage.local.set({ [key]: val });
+  browser.storage.local.set({ [key]: val });
 
 /**
- * wrapper for chrome.storage.local.get. return the
+ * wrapper for browser.storage.local.get. return the
  * local stored objects given a key.
  * @param {string} key
  * @returns
@@ -20,13 +20,13 @@ export const getItem = (
   defaultVal: unknown = undefined,
 ): Promise<any> => {
   return new Promise((resolve) => {
-    chrome.storage.local.get([key], (result) => {
+    browser.storage.local.get([key], (result) => {
       resolve(result[key] === undefined ? defaultVal : result[key]);
     });
   });
 };
 
-export const removeItem = (key: string) => chrome.storage.local.remove(key);
+export const removeItem = (key: string) => browser.storage.local.remove(key);
 
 export const saveSecure = saveItem;
 
@@ -48,7 +48,7 @@ export const delPlaylist = (playlistId: string) =>
   ]);
 
 export const exportPlayerContent = async () => {
-  const items = await chrome.storage.local.get(null);
+  const items = await browser.storage.local.get(null);
   return compressSync(strToU8(JSON.stringify(items)));
 };
 
@@ -72,7 +72,7 @@ export const getRegExtractMapping = async (): Promise<
   }
 };
 
-export const clearStorage = () => chrome.storage.local.clear();
+export const clearStorage = () => browser.storage.local.clear();
 
 export const getDefaultTheme = () => ({});
 

@@ -1,15 +1,15 @@
 import { DEFAULT_UA } from '@APM/utils/BiliFetch';
 
-chrome.action.onClicked.addListener(() => {
+browser.action.onClicked.addListener(() => {
   // console.log('onClicked')
-  chrome.tabs.create({
-    url: chrome.runtime.getURL('popup.html'),
+  browser.tabs.create({
+    url: browser.runtime.getURL('popup.html'),
   });
 });
 
 // https://stackoverflow.com/questions/72736806/use-declarativenetrequest-to-set-the-referer-header-when-using-fetch-in-a-ch
 // this is only executed after the extension is reloaded.
-chrome.runtime.onInstalled.addListener(async () => {
+browser.runtime.onInstalled.addListener(async () => {
   const rules = [
     {
       id: 5,
@@ -34,7 +34,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         ],
       },
       condition: {
-        domains: [chrome.runtime.id],
+        domains: [browser.runtime.id],
         urlFilter: 'api.bilibili',
         resourceTypes: ['xmlhttprequest'],
       },
@@ -62,7 +62,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         ],
       },
       condition: {
-        domains: [chrome.runtime.id],
+        domains: [browser.runtime.id],
         urlFilter: 'www.youtube.com',
         resourceTypes: ['xmlhttprequest'],
       },
@@ -90,7 +90,7 @@ chrome.runtime.onInstalled.addListener(async () => {
         ],
       },
       condition: {
-        domains: [chrome.runtime.id],
+        domains: [browser.runtime.id],
         urlFilter: 'member.bilibili.com',
         resourceTypes: ['xmlhttprequest'],
       },
@@ -118,16 +118,16 @@ chrome.runtime.onInstalled.addListener(async () => {
         ],
       },
       condition: {
-        domains: [chrome.runtime.id],
+        domains: [browser.runtime.id],
         urlFilter: 'music.youtube.com',
         resourceTypes: ['xmlhttprequest'],
       },
     },
   ];
 
-  chrome.declarativeNetRequest.getDynamicRules((previousRules) => {
+  browser.declarativeNetRequest.getDynamicRules((previousRules) => {
     const previousRuleIds = previousRules.map((rule) => rule.id);
-    chrome.declarativeNetRequest.updateDynamicRules({
+    browser.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: previousRuleIds,
       // @ts-ignore
       addRules: rules,

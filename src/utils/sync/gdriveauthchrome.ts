@@ -2,10 +2,10 @@ let authUrl = 'https://accounts.google.com/o/oauth2/auth?';
 const clientId = process.env.CHROMEAPP_CLIENT_ID!; // must be Web Application type
 // https://stackoverflow.com/questions/40411493/can-chrome-identity-launchwebauthflow-be-used-to-authenticate-against-google-api
 export default () => {
-  console.debug(chrome.identity.getRedirectURL());
+  console.debug(browser.identity.getRedirectURL());
   const authParams = {
     clientId,
-    redirect_uri: chrome.identity.getRedirectURL(),
+    redirect_uri: browser.identity.getRedirectURL(),
     response_type: 'token',
     scope: 'https://www.googleapis.com/auth/drive.appdata',
     login_hint: 'goodhentai@gmail.com', // fake or non-existent won't work
@@ -13,7 +13,7 @@ export default () => {
   const url = new URLSearchParams(Object.entries(authParams));
   url.toString();
   authUrl += url;
-  chrome.identity.launchWebAuthFlow(
+  browser.identity.launchWebAuthFlow(
     { url: authUrl, interactive: true },
     (responseUrl) => {
       console.log(responseUrl);

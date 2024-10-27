@@ -2,7 +2,7 @@ import { getName } from '@APM/utils/re';
 import { songExport2URL } from '@APM/utils/mediafetch/resolveURL';
 
 export const searchSongOnWeb = (song: NoxMedia.Song) => {
-  chrome.search.query({
+  browser.search.query({
     text: getName(song, true),
     disposition: 'NEW_TAB',
   });

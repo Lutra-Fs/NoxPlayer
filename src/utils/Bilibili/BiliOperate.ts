@@ -12,13 +12,13 @@ const BILI_VIDEOINFO_API =
   'https://api.bilibili.com/x/web-interface/view?bvid=';
 
 /**
- * get a cookie using chrome.cookies.get.
+ * get a cookie using browser.cookies.get.
  * @param {string} domain url of the cookie, eg bilibili.com
  * @param {string} name name of the cookie, eg SESSIONDATA
  * @returns
  */
 export const getCookie = async (domain: string, name: string) => {
-  return chrome.cookies.get({ url: domain, name });
+  return browser.cookies.get({ url: domain, name });
 };
 
 /**
