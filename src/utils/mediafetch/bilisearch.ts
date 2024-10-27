@@ -33,7 +33,7 @@ const fetchBiliSearchList = async (
   // in start up?
   if (!cookiedSearch) {
     cookieSESSDATA = await getBiliSESS();
-    await chrome.cookies.set({
+    await browser.cookies.set({
       url: 'https:api.bilibili.com',
       domain: '.bilibili.com',
       name: 'SESSDATA',
@@ -55,7 +55,7 @@ const fetchBiliSearchList = async (
     console.error(e);
   } finally {
     if (!cookiedSearch) {
-      await chrome.cookies.set({
+      await browser.cookies.set({
         url: 'https:api.bilibili.com',
         domain: '.bilibili.com',
         name: 'SESSDATA',

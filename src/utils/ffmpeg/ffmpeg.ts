@@ -13,8 +13,8 @@ ffmpeg.on('log', ({ message }) => {
   console.debug(message);
 });
 await ffmpeg.load({
-  coreURL: chrome.runtime.getURL('js/ffmpeg-core.js'),
-  wasmURL: chrome.runtime.getURL('js/ffmpeg-core.wasm'),
+  coreURL: browser.runtime.getURL('js/ffmpeg-core.js'),
+  wasmURL: browser.runtime.getURL('js/ffmpeg-core.wasm'),
 });
 
 export default async (url: string) => {
